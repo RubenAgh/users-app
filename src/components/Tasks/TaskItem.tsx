@@ -40,10 +40,11 @@ const ActionsContainer = styled.div`
   }
 `;
 
-const DeleteBtn = styled.button`
+export const DeleteBtn = styled.button`
   border: none;
   height: 32px;
   min-width: 64px;
+  cursor: pointer;
   border-radius: 4px;
   background-color: ${props => getStyleFromProps(props, 'deleteBtnBackground')};
   color: ${props => getStyleFromProps(props, 'deleteBtnColor')} !important;
