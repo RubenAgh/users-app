@@ -18,10 +18,16 @@ const Home: React.FC = () => {
   const [{ tasks, isLoading }, dispatch] = useReducer(tasksReducer, { tasks: [], isLoading: true });
 
   useEffect(() => {
-    fetchTasksData()
+    const abortController = new AbortController();
+    const signal = abortController.signal;
+    fetchTasksData(signal)
       .then((tasks) => {
         dispatch({ type: TasksActions.SET_DATA, payload: { tasks, isLoading: false } });
       });
+
+      return () => {
+        abortController.abort();
+      };
   }, []);
 
   return (

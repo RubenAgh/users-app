@@ -16,7 +16,10 @@ const theme: object = {
     btnColor: '#eeeeee',
     deleteBtnColor: '#f2f2fa',
     taskItemBackground: '#e5e6eb',
-    disabledBtnBackground: '#c7c7c9'
+    disabledBtnBackground: '#c7c7c9',
+    tableRowBackground: '#f8f8f8',
+    tableBorderColor: '#cccccc',
+    tableRowBorderColor: '#dddddd'
   },
   dark: {
     contentBackground: '#3e3e42',
@@ -31,7 +34,10 @@ const theme: object = {
     deleteBtnColor: '#eeeeee',
     btnBackgroundColor: '#e5e6eb',
     btnColor: '#343d46',
-    disabledBtnBackground: '#cccccc'
+    disabledBtnBackground: '#cccccc',
+    tableRowBackground: '#78787a',
+    tableBorderColor: '#505052',
+    tableRowBorderColor: '#505052'
   }
 };
 

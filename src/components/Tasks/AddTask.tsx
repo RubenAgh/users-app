@@ -33,6 +33,7 @@ const Container = styled.div`
 export const Button = styled.button`
   border: none;
   height: 32px;
+  cursor: pointer;
   min-width: 64px;
   border-radius: 4px;
   color: ${props => getStyleFromProps(props, 'btnColor')};
