@@ -1,7 +1,5 @@
 import { memo } from 'react';
 import styled from 'styled-components';
-import { UserInterface } from 'reducers/usersReducer';
-import { DeleteBtn } from 'components/Tasks/TaskItem';
 import TableHeader, { HeaderProps } from './TableHeader';
 import { getStyleFromProps } from 'utils/getStyleFromProps';
 
@@ -35,7 +33,7 @@ export const Tr = styled.tr`
   }
 `;
 
-const Td = styled.td`
+export const Td = styled.td`
   padding: 12px;
   text-align: center;
   @media screen and (max-width: 930px) {
@@ -68,42 +66,27 @@ const NoData = styled.div`
 
 interface TableProps {
   tableCaption: string;
+  isEmpty: boolean;
   headerProps: Array<HeaderProps>;
-  getData: () => Array<UserInterface>;
-  handleDelete: (id: number) => void;
   onSort: (field: string, type: string) => void;
+  children: string | JSX.Element | JSX.Element[];
 }
 
-const Table: React.FC<TableProps> = ({ tableCaption, getData, handleDelete, headerProps, onSort }) => {
-  const data = getData();
-
-  return (
+const Table: React.FC<TableProps> = ({ tableCaption, headerProps, onSort, children, isEmpty }) => (
     <>
       <StyledTable>
         <Caption>{tableCaption}</Caption>
         <TableHeader headers={headerProps} onSort={onSort} />
         <tbody>
-          {data.map((user: UserInterface) => (
-            <Tr key={user.id}>
-              <Td data-label="Name">{user.name}</Td>
-              <Td data-label="Email">{user.email}</Td>
-              <Td data-label="Age">{user.age}</Td>
-              <Td data-label="Actions">
-                <DeleteBtn onClick={() => handleDelete(user.id)}>
-                  Delete
-                </DeleteBtn>
-              </Td>
-            </Tr>
-          ))}
+          {children}
         </tbody>
       </StyledTable>
-      {!data.length && (
+      {isEmpty && (
         <NoData>
           No data...
         </NoData>
       )}
     </>
   );
-}
 
 export default memo(Table);
