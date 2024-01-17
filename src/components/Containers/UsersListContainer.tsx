@@ -1,8 +1,9 @@
-import { useCallback, useContext } from 'react';
-import Table from 'components/Table';
+import { useCallback, useContext, useMemo } from 'react';
+import Table, { Td, Tr } from 'components/Table';
 import { UserContext } from 'context/UserContext';
 import TablePagination from 'components/Table/TablePagination';
 import { UserActions, UserInterface } from 'reducers/usersReducer';
+import { DeleteBtn } from 'components/Tasks/TaskItem';
 
 const Headers = [
   { id: 1,title: 'Name', isSortable: true, field: 'name' },
@@ -27,28 +28,39 @@ const UsersListContainer: React.FC = () => {
     dispatch({ type: UserActions.DELETE, payload: { id } });
   }, [dispatch]);
 
-  const getUsers: () => Array<UserInterface> = () => {
+  const filteredUsers: Array<UserInterface> = useMemo(() => {
     if (searchTerm) {
       return users.filter((user: UserInterface) => user.name.toLowerCase().startsWith(searchTerm));
     }
 
     return users;
-  };
+  }, [searchTerm, users]);
 
   const handleSortTable = useCallback((field: string, type: string) => {
     dispatch({ type: UserActions.SORT, payload: { field, type } });
   }, [dispatch]);
 
-
   return (
     <>
       <Table
-        getData={getUsers}
         headerProps={Headers}
         tableCaption="User List"
+        isEmpty={!filteredUsers.length}
         onSort={handleSortTable}
-        handleDelete={deleteUser}
-      />
+      >
+        {filteredUsers.map((user: UserInterface) => (
+          <Tr key={user.id}>
+            <Td data-label="Name">{user.name}</Td>
+            <Td data-label="Email">{user.email}</Td>
+            <Td data-label="Age">{user.age}</Td>
+            <Td data-label="Actions">
+              <DeleteBtn onClick={() => deleteUser(user.id)}>
+                Delete
+              </DeleteBtn>
+            </Td>
+          </Tr>
+        ))}
+      </Table>
       <TablePagination
         totalPages={totalPages}
         goToNextPage={nextPage}

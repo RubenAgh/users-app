@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import styled from 'styled-components';
 import { Button } from 'components/Tasks/AddTask';
 
@@ -40,4 +41,4 @@ const TablePagination: React.FC<PaginationProps> = ({ currentPage, gotToPrevPage
   </Container>
 );
 
-export default TablePagination;
+export default memo(TablePagination);
