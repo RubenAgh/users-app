@@ -48,7 +48,7 @@ const Nav = styled.nav`
 
 const HeaderComponent: React.FC<{}> = () => (
   <Header>
-    <Link to="/">
+    <Link to="/" aria-label="Go to Home page">
       <Logo />
     </Link>
     <NavWrapper>

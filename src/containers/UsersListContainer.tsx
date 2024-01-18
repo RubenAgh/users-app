@@ -4,6 +4,7 @@ import { UserContext } from 'context/UserContext';
 import TablePagination from 'components/Table/TablePagination';
 import { UserActions, UserInterface } from 'reducers/usersReducer';
 import { DeleteBtn } from 'components/Tasks/TaskItem';
+import { Link } from 'react-router-dom';
 
 const Headers = [
   { id: 1,title: 'Name', isSortable: true, field: 'name' },
@@ -50,7 +51,11 @@ const UsersListContainer: React.FC = () => {
       >
         {filteredUsers.map((user: UserInterface) => (
           <Tr key={user.id}>
-            <Td data-label="Name">{user.name}</Td>
+            <Td data-label="Name">
+              <Link to={`${user.id}`}>
+                {user.name}            
+              </Link>
+            </Td>
             <Td data-label="Email">{user.email}</Td>
             <Td data-label="Age">{user.age}</Td>
             <Td data-label="Actions">

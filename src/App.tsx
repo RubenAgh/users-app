@@ -6,6 +6,7 @@ import { useTheme } from 'hooks/useTheme';
 import Theme from 'components/StyledTheme';
 import Header from 'components/Header/Header';
 import { ThemeContext } from 'context/ThemeContext';
+import ErrorBoundary from 'containers/ErrorBoundary';
 import { getStyleFromProps } from 'utils/getStyleFromProps';
 
 const Container = styled.div`
@@ -49,17 +50,22 @@ const App: React.FC = () => {
     <ThemeContext.Provider value={{ selectedTheme, switchTheme }}>
       <Theme>
         <Router>
+          <ErrorBoundary>
             <Header />
             <Container>
-                <PageWrapper>
-                  <Routes>
-                    <Route path="/" element={getLazyPage(Home)} />
-                    <Route path="/user-list" element={getLazyPage(UserList)} />
-                    <Route path="/user-list/:id" element={getLazyPage(UserDetails)} />
-                    <Route path="*" element={getLazyPage(NotFound)} />
-                  </Routes>
-                </PageWrapper>
+              <PageWrapper>
+                <Routes>
+                  <Route path="/" element={getLazyPage(Home)} />
+                  <Route path="/user-list" element={getLazyPage(UserList)} />
+                  <Route
+                    path="/user-list/:id"
+                    element={getLazyPage(UserDetails)}
+                  />
+                  <Route path="*" element={getLazyPage(NotFound)} />
+                </Routes>
+              </PageWrapper>
             </Container>
+          </ErrorBoundary>
         </Router>
       </Theme>
     </ThemeContext.Provider>
