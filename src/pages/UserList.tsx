@@ -6,8 +6,8 @@ import usePagination from 'hooks/usePagination';
 import { UserContext } from 'context/UserContext';
 import { fetchUsersData } from 'services/dataService';
 import UsersSearch from 'components/UsersList/UsersSearch';
+import UsersListContainer from 'containers/UsersListContainer';
 import { UserActions, usersReducer } from 'reducers/usersReducer';
-import UsersListContainer from 'components/Containers/UsersListContainer';
 
 const TableContainer = styled.div`
   display: flex;

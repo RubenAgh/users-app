@@ -36,6 +36,9 @@ export const Tr = styled.tr`
 export const Td = styled.td`
   padding: 12px;
   text-align: center;
+  a {
+    color: ${props => getStyleFromProps(props, 'textColor')};
+  }
   @media screen and (max-width: 930px) {
     display: flex;
     justify-content: space-between;

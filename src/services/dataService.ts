@@ -13,7 +13,7 @@ export const fetchTasksData = async (signal: AbortSignal, limit: number = 10) =>
 
 export const fetchUsersData = async (signal: AbortSignal, currentPage: number, limit: number = 10) => {
   try {
-    const response: any = await fetch(`${USERS_API_BASE_URL}/?page=${currentPage}&results=${limit}`, { signal });
+    const response: Response = await fetch(`${USERS_API_BASE_URL}/?page=${currentPage}&results=${limit}`, { signal });
     let { info, results } = await response.json();
     
     results = results.map((user: any, idx: number) => ({
@@ -24,6 +24,23 @@ export const fetchUsersData = async (signal: AbortSignal, currentPage: number, l
     }));
 
     return { data: results, totalItems: info.results * limit };  
+  } catch (error: any) {
+    throw new Error(`Error fetching data: ${error?.message}`);
+  }
+};
+
+export const fetchUserData = async (signal: AbortSignal, userId: string) => {
+  try {
+    const response: Response = await fetch(`${USERS_API_BASE_URL}?id=${userId}`, { signal });
+    const data = await response.json();
+    return data.results.map((user: any, idx: number) => ({
+      id: user.id.value || idx,
+      name: `${user.name.title} ${user.name.first} ${user.name.last}`,
+      email: user.email,
+      age: user.dob.age,
+      imageSrc: user.picture.large,
+      address: `${user.location.country} ${user.location.city}`
+    }))[0];
   } catch (error: any) {
     throw new Error(`Error fetching data: ${error?.message}`);
   }

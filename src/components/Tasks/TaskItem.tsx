@@ -113,7 +113,8 @@ const TaskItemComponent: React.FC<TaskItemProps> = ({ task, dispatch }) => {
         />
       )}
       <ActionsContainer>
-        <input type="checkbox" checked={completed} onChange={handleComplete} />
+        <label htmlFor={`checkbox-${id}`}>Completed</label>
+        <input type="checkbox" checked={completed} onChange={handleComplete} id={`checkbox-${id}`} />
         <Button
           ref={editBtnRef}
           onClick={editValue ? handleSave : switchToEditMode}
