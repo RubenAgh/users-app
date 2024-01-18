@@ -1,10 +1,11 @@
 import { useCallback, useContext, useMemo } from 'react';
+import { Link } from 'react-router-dom';
 import Table, { Td, Tr } from 'components/Table';
 import { UserContext } from 'context/UserContext';
+import { DeleteBtn } from 'components/Tasks/TaskItem';
+import UsersSearch from 'components/UsersList/UsersSearch';
 import TablePagination from 'components/Table/TablePagination';
 import { UserActions, UserInterface } from 'reducers/usersReducer';
-import { DeleteBtn } from 'components/Tasks/TaskItem';
-import { Link } from 'react-router-dom';
 
 const Headers = [
   { id: 1,title: 'Name', isSortable: true, field: 'name' },
@@ -43,6 +44,7 @@ const UsersListContainer: React.FC = () => {
 
   return (
     <>
+      <UsersSearch />
       <Table
         headerProps={Headers}
         tableCaption="User List"
