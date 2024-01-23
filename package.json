@@ -69,7 +69,8 @@
   "scripts": {
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
-    "test": "node scripts/test.js"
+    "test": "node scripts/test.js",
+    "analyze": "craco build"
   },
   "eslintConfig": {
     "extends": [
@@ -146,6 +147,8 @@
     ]
   },
   "devDependencies": {
-    "@types/react-lazy-load-image-component": "^1.6.3"
+    "@craco/craco": "^7.1.0",
+    "@types/react-lazy-load-image-component": "^1.6.3",
+    "webpack-bundle-analyzer": "^4.10.1"
   }
 }
